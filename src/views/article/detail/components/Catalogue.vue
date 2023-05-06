@@ -3,7 +3,13 @@
 const { preview } = defineProps<{ preview: any }>()
 
 onMounted(() => {
-  preview && buildAnchorTitles()
+  // 当preview加载完成后, 才能获取到锚点目录
+  let timer = setInterval(() => {
+    if (preview.$el) {
+      buildAnchorTitles()
+      clearInterval(timer)
+    }
+  }, 100)
 })
 
 let titles = $ref<any>([]) // 锚点目录
