@@ -18,6 +18,7 @@
     "crypto-js": "^4.1.1",
     "dayjs": "^1.11.7",
     "marked": "^4.2.12",
+    "md-editor-v3": "^3.0.1",
     "pinia": "^2.0.30",
     "pinia-plugin-persistedstate": "^3.0.2",
     "v3-infinite-loading": "^1.2.2",
