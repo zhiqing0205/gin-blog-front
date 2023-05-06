@@ -6,7 +6,7 @@ const { blogInfo } = storeToRefs(useAppStore())
 <template>
   <footer f-c-c>
     <div class="footer-wrap" p-y-40 p-x-20 w-full text-14 text-center text-white leading-30>
-      <p> &copy;{{ 2022 }} - {{ new Date().getFullYear() }} By 阵、雨</p>
+      <p> &copy;{{ 2022 }} - {{ new Date().getFullYear() }} By ziuch</p>
       <a href="https://beian.miit.gov.cn/" target="_blank">
         {{ blogInfo.blog_config?.website_record }}
       </a>
