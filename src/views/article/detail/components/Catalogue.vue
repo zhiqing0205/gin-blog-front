@@ -24,7 +24,7 @@ function buildAnchorTitles() {
   titles = titleList.map((el: any, idx: number) => {
     return {
       title: el.innerText,
-      lineIndex: el.getAttribute('data-v-md-line'),
+      lineIndex: el.getAttribute('data-line'),
       indent: hTags.indexOf(el.tagName),
       number: idx + 1, // 序号
     }
@@ -33,7 +33,7 @@ function buildAnchorTitles() {
 
 // 点击锚点目录
 function handleAnchorClick(anchor: any, idx: number) {
-  const heading = preview.$el.querySelector(`[data-v-md-line="${anchor.lineIndex}"]`)
+  const heading = preview.$el.querySelector(`[data-line="${anchor.lineIndex}"]`)
   // const heading = preview.querySelector(`#${anchor.title}`)
   if (heading) {
     window.scrollTo({
@@ -54,7 +54,7 @@ function handleAnchorClick(anchor: any, idx: number) {
 const { y } = $(useWindowScroll())
 watchThrottled($$(y), () => {
   titles.forEach((e: any, idx: number) => {
-    const heading = preview.$el.querySelector(`[data-v-md-line="${e.lineIndex}"]`)
+    const heading = preview.$el.querySelector(`[data-line="${e.lineIndex}"]`)
     if (y >= heading.offsetTop - 50) // 比 40 稍微多一点
       currentIdx = idx
   })
