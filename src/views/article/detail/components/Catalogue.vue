@@ -21,12 +21,28 @@ function buildAnchorTitles() {
   if (!titleList.length)
     titles = []
   const hTags = Array.from(new Set(titleList.map((t: any) => t.tagName))).sort()
+
+  let count = [0, 0, 0, 0, 0, 0]
   titles = titleList.map((el: any, idx: number) => {
+    // 获取元素的级别
+    const level = hTags.indexOf(el.tagName)
+    // 当前级别的索引加1
+    const index = ++count[level]
+
+    // 重置低级别的索引
+    for(let i = level + 1; i < count.length; i++)
+      count[i] = 0
+
+    // 拼接索引号
+    const number = count.slice(0, level + 1).join('.')
+    // 更新当前元素的计数器
+    count[level-1] = index;
+
     return {
       title: el.innerText,
       lineIndex: el.getAttribute('data-line'),
       indent: hTags.indexOf(el.tagName),
-      number: idx + 1, // 序号
+      number: number,
     }
   })
 }
@@ -75,9 +91,7 @@ watchThrottled($$(y), () => {
         :style="{ paddingLeft: `${5 + anchor.indent * 15}px` }"
         @click="handleAnchorClick(anchor, idx)"
       >
-        <!-- TODO: 带子序号: 1.1, 1.2 这种 -->
-        <button> {{ anchor.title }} </button>
-        <!-- <button> {{ anchor.number }} . {{ anchor.title }} </button> -->
+         <button> {{ anchor.number }} {{ anchor.title }} </button>
       </div>
     </div>
   </Transition>
