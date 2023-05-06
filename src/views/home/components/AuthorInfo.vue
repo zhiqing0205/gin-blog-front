@@ -14,6 +14,7 @@ function addToFavourites() {
     <n-image
       width="110" :src="convertImgUrl(blogConfig.website_avatar)"
       duration-600 hover:rotate-360 py-15
+      style="border-radius: 50%;"
     />
     <p text-24>
       {{ blogConfig.website_author }}
