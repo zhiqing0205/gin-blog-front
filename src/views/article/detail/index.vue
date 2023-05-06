@@ -1,18 +1,6 @@
 <script setup lang="ts">
-import VMdPreview from '@kangc/v-md-editor/lib/preview'
-import '@kangc/v-md-editor/lib/style/preview.css'
-import githubTheme from '@kangc/v-md-editor/lib/theme/github.js'
-import '@kangc/v-md-editor/lib/theme/style/github.css'
-
-// 引入全部语言包 (不推荐)
-// import hljs from 'highlight.js'
-// highlightjs 核心代码
-import hljs from 'highlight.js/lib/core'
-// 按需引入语言包
-import json from 'highlight.js/lib/languages/json'
-import javascript from 'highlight.js/lib/languages/javascript'
-import go from 'highlight.js/lib/languages/go'
-import bash from 'highlight.js/lib/languages/bash'
+import MdEditor from 'md-editor-v3'
+import 'md-editor-v3/lib/style.css'
 
 import BannerInfo from './components/BannerInfo.vue'
 import Copyright from './components/Copyright.vue'
@@ -26,12 +14,6 @@ import Comment from '@/components/comment/Comment.vue'
 
 import { convertImgUrl } from '@/utils'
 import api from '@/api'
-
-hljs.registerLanguage('json', json)
-hljs.registerLanguage('javascript', javascript)
-hljs.registerLanguage('go', go)
-hljs.registerLanguage('bash', bash)
-VMdPreview.use(githubTheme, { Hljs: hljs })
 
 let data = $ref<any>({
   id: 0,
@@ -120,10 +102,10 @@ onMounted(() => {
       <n-gi span="12 m:9">
         <div card-view pt-30>
           <!-- 文章内容 -->
-          <VMdPreview
+          <MdEditor
             ref="previewRef"
-            :text="data.content"
-            lg:mx-20
+            v-model="data.content"
+            :previewOnly="true"
           />
           <!-- <div
             ref="previewRef"
